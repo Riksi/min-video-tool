@@ -30,6 +30,12 @@ def main():
     
     st.title("Image Sequence to Video")
 
+    st.write("""
+    This app allows you to create a video from a sequence of images.
+            
+    **Warning:** This is a basic version and may have bugs.
+    """)
+
     # Upload image files
     st.subheader("Upload Image Files")
     uploaded_files = st.file_uploader("Upload images", type=["jpg", "png"], accept_multiple_files=True)

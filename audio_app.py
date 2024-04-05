@@ -25,6 +25,8 @@ def main():
 
     st.write("""
     This app allows you to extract audio from a video file.
+    
+    **Warning:** This is a basic version and may have bugs.         
     """)
 
     # Upload video file
