@@ -36,7 +36,7 @@ def main():
 
     if uploaded_files:
         # Display uploaded images
-        images = [cv2.imdecode(np.fromstring(file.read(), np.uint8), cv2.IMREAD_UNCHANGED)[..., :-1] for file in uploaded_files]
+        images = [cv2.imdecode(np.fromstring(file.read(), np.uint8), cv2.IMREAD_UNCHANGED)[..., :3] for file in uploaded_files]
 
         # Display in rows of 5
         num_images = len(images)

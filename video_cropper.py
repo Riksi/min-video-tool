@@ -1,4 +1,3 @@
-import cv2
 from PIL import Image
 from moviepy.editor import VideoFileClip
 import streamlit as st
