@@ -61,7 +61,7 @@ def main():
     st.title("Video Cropper")
 
     st.write("""
-    This tool allows you to crop a video file to a specified region.
+    This tool allows you to crop a video file to a specified region and time range.
     
     **Warning:** This is a basic version and may have bugs. 
     """)

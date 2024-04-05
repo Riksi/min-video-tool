@@ -37,7 +37,7 @@ def main():
     st.title("Video Merger")
 
     st.write("""
-    This app allows you to merge multiple videos into a single video file.
+    This tool allows you to merge multiple videos into a single video file.
     
     **Warning:** This is a basic version and may have bugs. Ensure that all videos have the same dimensions and frame rates. 
     
