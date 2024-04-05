@@ -24,7 +24,7 @@ def main():
     st.title("Audio Extractor")
 
     st.write("""
-    This app allows you to extract audio from a video file.
+    This tool allows you to extract audio from a video file.
     
     **Warning:** This is a basic version and may have bugs.         
     """)

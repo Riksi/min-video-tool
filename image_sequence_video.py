@@ -31,7 +31,7 @@ def main():
     st.title("Image Sequence to Video")
 
     st.write("""
-    This app allows you to create a video from a sequence of images.
+    This tool allows you to create a video from a sequence of images.
             
     **Warning:** This is a basic version and may have bugs.
     """)
