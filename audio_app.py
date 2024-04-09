@@ -24,28 +24,31 @@ def main():
     st.title("Audio Extractor")
 
     st.write("""
-    This tool allows you to extract audio from a video file.
+    A simple tool to extract audio from a video file.
     
     **Warning:** This is a basic version and may have bugs.         
     """)
 
     # Upload video file
     st.subheader("Upload Video File")
-    uploaded_file = st.file_uploader("Upload video", type=["mp4"], key='audio_app')
+    uploaded_file = st.file_uploader("Upload video", type=["mp4", "mov"], key='audio_app')
 
     if uploaded_file:
         # Display uploaded video path
         video_path = "tmp/uploaded_video.mp4"
         with open(video_path, "wb") as f:
             f.write(uploaded_file.read())
-        st.write("Uploaded Video Path:", video_path)
+
+        ## Get duration
+        video_clip = VideoFileClip(video_path)
+        video_duration = video_clip.duration
 
         ## Display the video
         st.video(video_path)
 
         # Get parameters
-        start_time = st.number_input("Start time (seconds)", min_value=0)
-        end_time = st.number_input("End time (seconds)", min_value=start_time if start_time is not None else 0)
+        start_time, end_time = st.slider("Select time range", 0.0, video_duration, (0.0, video_duration))
+        
         
         output_audio_path = os.path.join("tmp/output_audio.mp3")
 
@@ -61,4 +64,7 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except Exception as e:
+        st.error(f"An error occurred: {e}")

@@ -68,7 +68,7 @@ def main():
 
     # Upload video file
     st.subheader("Upload Video File")
-    uploaded_file = st.file_uploader("Upload video", type=["mp4"], key='video_cropper')
+    uploaded_file = st.file_uploader("Upload video", type=["mp4", "mov"], key='video_cropper')
 
     if uploaded_file:
         # Display uploaded video path
@@ -78,7 +78,7 @@ def main():
         st.write("Uploaded Video Path:", video_path)
         # Get video duration using moviepy
         video_clip = VideoFileClip(video_path)
-        duration = int(video_clip.duration)
+        duration = video_clip.duration
         # Get dimensions of the video
         video_width = video_clip.size[0]
         video_height = video_clip.size[1]
@@ -86,7 +86,6 @@ def main():
         hval = video_height // 2
 
         dim = min(wval, hval)
-        tval = min(duration, 1)
 
 
         # Get parameters
@@ -97,16 +96,21 @@ def main():
         y = colms[1].number_input("Y-coordinate of top-left corner (in pixels)", 
                                   value=video_height//2 - dim//2,
                                   min_value=0, max_value=video_height)
-        width = colms[2].number_input("Width of cropped region (in pixels)", value=dim,         min_value=1, max_value=video_width)
+        width = colms[2].number_input("Width of cropped region (in pixels)", value=dim,         
+                                      min_value=1, max_value=video_width)
         height = colms[3].number_input("Height of cropped region (in pixels)", value=dim,
                                         min_value=1, max_value=video_height)
         colms2 = st.columns(2)
-        start = colms2[0].number_input("Start time (in seconds)", min_value=0)
-        end = colms2[1].number_input("End time (in seconds)", min_value=start if start is not None else 0, max_value=duration, value=tval)
+        start = colms2[0].number_input("Start time (in seconds)", min_value=0.0)
+        end = colms2[1].number_input("End time (in seconds)", 
+                                     min_value=start if start is not None else 0.0, 
+                                     max_value=duration, 
+                                     value=min(start + 1., duration) if start is not None else 1.0
+                                    )
 
         # Display video duration and dimensions
         st.write(f"Video Duration: {duration} seconds")
-        st.write(f"Video Dimensions: {video_width}x{video_height} pixels")
+        st.write(f"Video Dimensions (H x W): {video_height} x {video_width} pixels")
 
         btn_colms = st.columns(2)
 
